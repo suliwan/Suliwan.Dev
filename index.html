@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Suliwan.Dev — Front-end & Experiências Web</title>
+    <meta name="description"
+        content="FrontCraft — desenvolvimento front-end, interfaces interativas e performance. Sites, landing pages e integrações API." />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050617;
+            /* deep background */
+            --panel: #0b1220;
+            /* panels/cards */
+            --muted: #98a0b3;
+            /* muted text */
+            --txt: #eaf0ff;
+            /* main text */
+            --accent-cyan: #06b6d4;
+            /* cyan */
+            --accent-purple: #7c3aed;
+            /* purple */
+            --glass: rgba(255, 255, 255, 0.03);
+            --radius: 14px;
+            --maxw: 1200px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, Poppins, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: radial-gradient(1200px 800px at 10% 10%, rgba(124, 58, 237, 0.06), transparent 8%),
+                radial-gradient(1000px 600px at 90% 90%, rgba(6, 182, 212, 0.04), transparent 8%),
+                var(--bg);
+            color: var(--txt);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit
+        }
+
+        .container {
+            max-width: var(--maxw);
+            margin: 36px auto;
+            padding: 0 20px
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.00));
+            backdrop-filter: blur(6px);
+            position: sticky;
+            top: 18px;
+            z-index: 100
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(7, 12, 36, 0.5);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* ou cover, se quiser preencher */
+            display: block;
+
+        }
+
+        .brand h1 {
+            font-size: 16px;
+            margin: 0;
+            font-weight: 700
+        }
+
+        nav {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        nav a {
+            padding: 8px 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        nav a:hover {
+            color: var(--txt);
+            background: rgba(255, 255, 255, 0.02)
+        }
+
+        .btn-quote {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            color: #041024;
+            border: 0;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer
+        }
+
+        /* Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 480px;
+            gap: 32px;
+            align-items: center;
+            margin-top: 26px
+        }
+
+        .hero-card {
+            padding: 34px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            box-shadow: 0 20px 60px rgba(2, 6, 23, 0.6);
+            position: relative;
+            overflow: visible
+        }
+
+        .eyebrow {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px 12px;
+            border-radius: 999px;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-size: 12px
+        }
+
+        .hero h2 {
+            font-family: Poppins, sans-serif;
+            font-size: 40px;
+            margin: 18px 0 10px;
+            line-height: 1.02
+        }
+
+        .hero p {
+            color: var(--muted);
+            margin-bottom: 18px;
+            font-size: 16px
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 0;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            color: #041024
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--muted)
+        }
+
+        .micro {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 12px
+        }
+
+        /* Particle canvas overlay */
+        #particles-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            border-radius: 18px;
+            pointer-events: none
+        }
+
+        /* hero visual */
+        .hero-visual {
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.0));
+            box-shadow: 0 18px 60px rgba(2, 6, 23, 0.5)
+        }
+
+        .hero-visual img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        /* Sections */
+        .section {
+            margin-top: 36px
+        }
+
+        .section h3 {
+            font-size: 22px;
+            margin: 0 0 12px
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px
+        }
+
+        .service {
+            background: var(--panel);
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            transition: transform .28s
+        }
+
+        .service:hover {
+            transform: translateY(-8px)
+        }
+
+        .service .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--accent-cyan);
+            margin-bottom: 12px
+        }
+
+        .service p {
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px
+        }
+
+        .project {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer
+        }
+
+        .project img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            transition: transform .4s ease
+        }
+
+        .project:hover img {
+            transform: scale(1.06)
+        }
+
+        .proj-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(2, 6, 23, 0.6));
+            display: flex;
+            align-items: flex-end;
+            padding: 14px;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all .28s
+        }
+
+        .project:hover .proj-overlay {
+            opacity: 1;
+            transform: none
+        }
+
+        .proj-overlay h4 {
+            margin: 0;
+            font-size: 16px
+        }
+
+        /* About / Contact */
+        .about {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start
+        }
+
+        .about-left {
+            flex: 1
+        }
+
+        .about-right {
+            width: 360px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            padding: 18px;
+            border-radius: 12px
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        .field {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: transparent;
+            color: var(--txt);
+            font-weight: 600
+        }
+
+        .field::placeholder {
+            color: var(--muted);
+            font-weight: 500
+        }
+
+        .note {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding: 18px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.02));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px
+        }
+
+        /* Responsive */
+        @media(max-width:1100px) {
+            .hero {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .about {
+                flex-direction: column
+            }
+
+            .about-right {
+                width: 100%
+            }
+        }
+
+        @media(max-width:720px) {
+            nav {
+                display: none
+            }
+
+            header {
+                padding: 10px
+            }
+
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(12px);
+            animation: fadeUp .6s ease forwards
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .glow {
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.18)
+        }
+
+        .small {
+            font-size: 13px;
+            color: var(--muted)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="brand">
+                <div class="logo">
+                    <img src="imagens/LOGO SULIWAN.DEV.PNG" alt="Logo Suliwan.Dev">
+                </div>
+                <div>
+                    <h1 style="margin:0;font-size:16px">Suliwan.Dev</h1>
+                    <div class="small">Front-end • Interfaces • Performance</div>
+                </div>
+            </div>
+
+            <nav aria-label="Main navigation">
+                <a href="#home">Início</a>
+                <a href="#services">Serviços</a>
+                <a href="#portfolio">Portfólio</a>
+                <a href="#about">Sobre</a>
+                <a href="#contact">Contato</a>
+                <button class="btn-quote" onclick="scrollToContact()">Solicitar Projeto</button>
+            </nav>
+        </header>
+
+        <!-- HERO -->
+        <main id="home" style="margin-top:22px">
+            <section class="hero">
+                <div class="hero-card fade-up" aria-labelledby="heroTitle">
+                    <!-- Canvas for particles -->
+                    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+                    <span class="eyebrow">Agência Front-End</span>
+                    <h2 id="heroTitle">Criamos interfaces que impressionam e convertem</h2>
+                    <p>Código limpo, performance otimizada e experiência de usuário de alto padrão — construção de
+                        sites, landing pages e sistemas front-end escaláveis.</p>
+
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="scrollToSection('services')">Peça seu site
+                            agora</button>
+                        <button class="btn btn-ghost" onclick="scrollToContact()">Fale com especialista</button>
+                    </div>
+
+                    <div class="micro">Entrega ágil, testes de performance e suporte pós-lançamento.</div>
+                </div>
+
+                <div class="hero-visual glow fade-up" style="max-height:385px;">
+                    <img src="imagens/POST LOGO.PNG" alt="FrontCraft - development" loading="lazy">
+                </div>
+            </section>
+
+            <!-- SERVICES -->
+            <section id="services" class="section">
+                <h3>Serviços</h3>
+                <div class="services-grid">
+                    <div class="service fade-up">
+                        <div class="icon">🧩</div>
+                        <h4>Site institucional</h4>
+                        <p class="small">Apresentação da empresa, serviços, contato.</p>
+                    </div>
+
+                    <div class="service fade-up" style="animation-delay:.05s">
+                        <div class="icon">👜</div>
+                        <h4>Portfólio</h4>
+                        <p class="small">Para profissionais liberais.</p>
+                    </div>
+
+                    <div class="service fade-up" style="animation-delay:.1s">
+                        <div class="icon">🍽</div>
+                        <h4>Cardápio online</h4>
+                        <p class="small">om QR Code (mobile first).</p>
+                    </div>
+
+                    <div class="service fade-up" style="animation-delay:.15s">
+                        <div class="icon">📞</div>
+                        <h4>Mine site para WhatsApp</h4>
+                        <p class="small">Página simples para enviar link no chat.</p>
+                    </div>
+
+                    <div class="service fade-up" style="animation-delay:.2s">
+                        <div class="icon">🌐</div>
+                        <h4>Landing Pages</h4>
+                        <p class="small">Páginas de alta conversão, A/B testing e integrações com analytics.</p>
+                    </div>
+
+                    <div class="service fade-up" style="animation-delay:.25s">
+                        <div class="icon">🔒</div>
+                        <h4>Auditoria & Segurança</h4>
+                        <p class="small">Análises de vulnerabilidades front-end e recomendações de correção.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PORTFOLIO -->
+            <section id="portfolio" class="section">
+                <h3>Portfólio</h3>
+                <div class="portfolio-grid">
+                    <a href="https://suliwan.github.io/cardapio-camisa11/#bebidas" target="_blank" class="project">
+                        <img src="imagens/CARDÁPIO ONLINE.jpg" alt="Cardápio Online">
+                        <div class="proj-overlay">
+                            <h4>Cardápio Online</h4>
+                        </div>
+                    </a>
+
+                    <a href="https://suliwan.github.io/Suliwan/" target="_blank" class="project">
+                        <img src="imagens/LANDING PAGE.jpg" alt="Landing Page Real">
+                        <div class="proj-overlay">
+                            <h4>Site institucional</h4>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- ABOUT -->
+            <section id="about" class="section about">
+                <div class="about-left">
+                    <h3>Sobre a Suliwan.Dev</h3>
+                    <p class="small">Somos uma empresa especializada em front-end moderno: unimos design, performance e
+                        boas
+                        práticas para construir produtos digitais escaláveis. Entregamos código limpo, documentação e
+                        suporte contínuo.</p>
+
+                    <div style="display:flex;gap:12px;margin-top:14px">
+                        <div
+                            style="background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple));padding:10px;border-radius:10px;font-weight:700;color:#041024">
+                            +120 Projetos</div>
+                        <div
+                            style="background:rgba(255,255,255,0.02);padding:10px;border-radius:10px;color:var(--muted)">
+                            SLA e suporte</div>
+                    </div>
+                </div>
+
+                <div class="about-right">
+                    <strong>Quer começar?</strong>
+                    <p class="small" style="margin-top:8px">Conte-nos sobre o seu projeto e receba um orçamento inicial
+                        sem compromisso.</p>
+                    <div style="margin-top:12px">
+                        <button class="btn btn-primary" onclick="scrollToContact()">Solicitar Orçamento</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT -->
+            <section id="contact" class="section" style="margin-bottom:26px">
+                <h3>Contato</h3>
+                <div style="display:flex;gap:20px;flex-wrap:wrap">
+                    <div style="flex:1;min-width:280px">
+                        <form id="contactForm" class="contact-form" onsubmit="event.preventDefault(); submitContact();">
+                            <input id="cf_name" class="field" placeholder="Nome completo" required />
+                            <input id="cf_email" class="field" type="email" placeholder="E-mail" required />
+                            <input id="cf_phone" class="field" placeholder="Telefone (ex: 5511999999999)" required />
+                            <textarea id="cf_message" class="field" rows="5"
+                                placeholder="Descreva seu projeto (breve)"></textarea>
+
+                            <div style="display:flex;gap:12px;margin-top:8px">
+                                <button class="btn btn-primary" type="submit">Enviar & WhatsApp</button>
+                                <button class="btn btn-ghost" type="button" onclick="clearContactForm()">Limpar</button>
+                            </div>
+
+                            <div class="note" style="margin-top:8px">Ao enviar, abriremos uma conversa no WhatsApp (nº:
+                                5561994172085) com a prévia da sua mensagem.</div>
+                        </form>
+                    </div>
+
+                    <div style="width:320px;min-width:220px">
+                        <div
+                            style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px">
+                            <strong>Contato</strong>
+                            <p class="small" style="margin-top:8px">WhatsApp: <a href="https://wa.me/5561994172085"
+                                    target="_blank" rel="noopener" style="color:var(--accent-cyan)">+55 61
+                                    99417-2085</a></p>
+                            <p class="small">Email: suliwanlopes@gmail.com</p>
+                            <p class="small">Atendimento: seg–sex • 9h–18h</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div style="display:flex;align-items:center;gap:12px">
+                <div class="logo" style="width:44px;height:44px;">
+                    <img src="imagens/LOGO SULIWAN.DEV.PNG" alt="Logo Suliwan.Dev">
+                </div>
+
+                <div>
+                    <div style="font-weight:700">Suliwan.Dev</div>
+                    <div class="small" style="color:var(--muted)">Design & Desenvolvimento Front-end</div>
+                </div>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:12px">
+                <div class="small">© <span id="year"></span> Suliwan.Dev</div>
+                <div style="display:flex;gap:8px">
+                    <a class="small" href="#" aria-label="LinkedIn">in</a>
+                    <a class="small" href="#" aria-label="GitHub">GH</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Project modal (simple) -->
+    <div id="projectModal"
+        style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.7);z-index:90">
+        <div
+            style="background:var(--panel);padding:18px;border-radius:12px;max-width:760px;width:92%;box-shadow:0 20px 60px rgba(2,6,23,0.7)">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3 id="projTitle" style="margin:0">Título</h3>
+                <button style="background:transparent;border:0;color:var(--muted);font-weight:700"
+                    onclick="closeProject()">✕</button>
+            </div>
+            <p id="projDesc" class="small" style="margin-top:8px">Descrição</p>
+            <div style="margin-top:12px;text-align:right">
+                <button class="btn btn-primary" onclick="scrollToContact()">Solicitar Projeto Similar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Basic interactions and particle animation
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const waNumber = '5561994172085'; // contato WhatsApp
+
+        // Contact form -> WhatsApp
+        function submitContact() {
+            const name = document.getElementById('cf_name').value.trim();
+            const email = document.getElementById('cf_email').value.trim();
+            const phone = document.getElementById('cf_phone').value.trim();
+            const msg = document.getElementById('cf_message').value.trim();
+
+            if (!name || !email || !phone) { alert('Preencha nome, e-mail e telefone.'); return; }
+
+            const text = `Olá FrontCraft!%0A%0ATenho interesse em um projeto.%0A%0ANome: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0ATelefone: ${encodeURIComponent(phone)}%0A%0AMensagem: ${encodeURIComponent(msg)}%0A`;
+            const url = `https://wa.me/${waNumber}?text=${text}`;
+            window.open(url, '_blank');
+        }
+        function clearContactForm() { document.getElementById('contactForm').reset(); }
+
+        // Scroll helpers
+        function scrollToContact() { document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+
+        // Project modal
+        function openProject(title, desc) {
+            document.getElementById('projTitle').textContent = title;
+            document.getElementById('projDesc').textContent = desc;
+            document.getElementById('projectModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeProject() {
+            document.getElementById('projectModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // PARTCILES: simple canvas particle system (lightweight)
+        (function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let W, H, particles = [], ratio = window.devicePixelRatio || 1;
+            const config = { count: 40, maxVel: 0.6, size: [1, 3], colors: ['rgba(6,182,212,0.9)', 'rgba(124,58,237,0.9)'] };
+
+            function resize() {
+                W = canvas.width = canvas.clientWidth * ratio;
+                H = canvas.height = canvas.clientHeight * ratio;
+                ctx.scale(ratio, ratio);
+            }
+            function rand(min, max) { return Math.random() * (max - min) + min; }
+            function init() {
+                particles = [];
+                for (let i = 0; i < config.count; i++) {
+                    particles.push({
+                        x: rand(20, canvas.clientWidth - 20),
+                        y: rand(20, canvas.clientHeight - 20),
+                        vx: rand(-config.maxVel, config.maxVel),
+                        vy: rand(-config.maxVel, config.maxVel),
+                        r: rand(config.size[0], config.size[1]),
+                        c: config.colors[i % config.colors.length],
+                        alpha: rand(0.35, 0.95)
+                    });
+                }
+            }
+            function step() {
+                ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < -10) p.x = canvas.clientWidth + 10;
+                    if (p.x > canvas.clientWidth + 10) p.x = -10;
+                    if (p.y < -10) p.y = canvas.clientHeight + 10;
+                    if (p.y > canvas.clientHeight + 10) p.y = -10;
+
+                    // draw glow
+                    ctx.beginPath();
+                    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 8);
+                    g.addColorStop(0, p.c);
+                    g.addColorStop(1, 'rgba(7,12,36,0)');
+                    ctx.fillStyle = g;
+                    ctx.globalAlpha = p.alpha * 0.18;
+                    ctx.fillRect(p.x - p.r * 8, p.y - p.r * 8, p.r * 16, p.r * 16);
+
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = p.c;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(step);
+            }
+
+            function onResize() {
+                resize();
+                init();
+            }
+            window.addEventListener('resize', onResize);
+            // initial sizing after a tick so element has layout
+            setTimeout(() => { resize(); init(); step(); }, 150);
+        })();
+
+        // Staggered fade-up entrance
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.fade-up').forEach((el, i) => {
+                el.style.animation = `fadeUp 600ms ease ${i * 80}ms forwards`;
+            });
+        });
+
+        // accessibility: close modals on ESC
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProject(); });
+
+        // Small nav reveal on mobile (accessible toggle)
+        (function mobileNav() {
+            const btn = document.querySelector('.nav-toggle');
+            if (!btn) return;
+            btn.addEventListener('click', () => {
+                const nav = document.querySelector('nav');
+                const opened = nav.style.display === 'flex';
+                nav.style.display = opened ? 'none' : 'flex';
+                if (!opened) { nav.style.flexDirection = 'column'; nav.style.gap = '8px'; }
+            });
+        })();
+
+    </script>
+</body>
+
+</html>
