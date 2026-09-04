@@ -286,46 +286,41 @@
         }
 
         .project {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer
-        }
+    display: flex;
+    flex-direction: column; /* Coloca o texto obrigatoriamente abaixo da imagem */
+    text-decoration: none; /* Garante que o título não fique com sublinhado de link */
+    color: inherit; /* Faz o texto herdar a cor padrão do seu site */
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+}
 
-        .project img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-            transition: transform .4s ease
-        }
+.project img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px; /* Mantém as bordas arredondadas na própria imagem */
+    transition: transform .4s ease;
+}
 
-        .project:hover img {
-            transform: scale(1.06)
-        }
+.project:hover img {
+    transform: scale(1.04); /* Mantém o efeito de zoom sutil na foto */
+}
 
-        .proj-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent, rgba(2, 6, 23, 0.6));
-            display: flex;
-            align-items: flex-end;
-            padding: 14px;
-            color: #fff;
-            opacity: 0;
-            transform: translateY(8px);
-            transition: all .28s
-        }
+.proj-overlay {
+    /* Remove o posicionamento absoluto para o texto descer */
+    padding: 12px 4px; /* Espaçamento agradável entre a imagem e o texto */
+    display: flex;
+    align-items: center;
+}
 
-        .project:hover .proj-overlay {
-            opacity: 1;
-            transform: none
-        }
+.proj-overlay h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
 
-        .proj-overlay h4 {
-            margin: 0;
-            font-size: 16px
-        }
 
         /* About / Contact */
         .about {
@@ -634,7 +629,7 @@
                                     target="_blank" rel="noopener" style="color:var(--accent-cyan)">+55 61
                                     99248-5672</a></p>
                             <p class="small">Email: suliwanlopes@gmail.com</p>
-                            <p class="small">Atendimento: seg–sab • 8h–18h</p>
+                            <p class="small">Atendimento: seg–sab • 8h–23h</p>
                         </div>
                     </div>
                 </div>
